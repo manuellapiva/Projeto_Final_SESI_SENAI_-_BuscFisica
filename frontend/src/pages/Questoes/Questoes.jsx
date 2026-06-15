@@ -252,6 +252,12 @@ export default function Questoes() {
           <h2>{erro}</h2>
         )}
 
+        {!loading && !erro && (
+          <div className={styles.contadorQuestoes}>
+            Questões exibidas: <strong>{questoes.length}</strong>
+          </div>
+        )}
+
         {!loading &&
           !erro &&
           questoes.map(
