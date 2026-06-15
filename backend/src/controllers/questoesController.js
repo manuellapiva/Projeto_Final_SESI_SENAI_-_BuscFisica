@@ -191,12 +191,38 @@ async function deletar(req, res) {
   }
 }
 
+async function filtrar(req, res) {
+  try {
+    const {
+      vestibular,
+      materia,
+      topico
+    } = req.query;
+
+    const questoes =
+      await QuestoesModel.filtrar({
+        vestibular,
+        materia,
+        topico
+      });
+
+    res.status(200).json(questoes);
+
+  } catch (erro) {
+    res.status(500).json({
+      mensagem: 'Erro ao filtrar questões',
+      erro: erro.message
+    });
+  }
+}
+
 module.exports = {
   listarTodos,
   listarPorVestibular,
   listarPorMateria,
   listarPorTopico,
   buscarPorId,
+  filtrar,
   criar,
   atualizar,
   deletar

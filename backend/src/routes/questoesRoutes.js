@@ -5,6 +5,8 @@ const QuestoesController = require('../controllers/questoesController');
 
 router.get('/', QuestoesController.listarTodos);
 
+router.get('/filtro', QuestoesController.filtrar);
+
 router.get('/vestibular/:vestibular', QuestoesController.listarPorVestibular);
 
 router.get('/materia/:materia', QuestoesController.listarPorMateria);

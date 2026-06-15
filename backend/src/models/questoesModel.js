@@ -107,6 +107,52 @@ async function deletar(id) {
   return result.rowCount > 0;
 }
 
+async function filtrar({
+  vestibular,
+  materia,
+  topico
+}) {
+
+  let sql =
+    `SELECT *
+     FROM vw_questoes
+     WHERE 1=1`;
+
+  const valores = [];
+
+  if (vestibular) {
+    valores.push(`%${vestibular}%`);
+
+    sql += `
+      AND sigla ILIKE
+      $${valores.length}`;
+  }
+
+  if (materia) {
+    valores.push(`%${materia}%`);
+
+    sql += `
+      AND materia ILIKE
+      $${valores.length}`;
+  }
+
+  if (topico) {
+    valores.push(`%${topico}%`);
+
+    sql += `
+      AND topico ILIKE
+      $${valores.length}`;
+  }
+
+  const result =
+    await pool.query(
+      sql,
+      valores
+    );
+
+  return result.rows;
+}
+
 module.exports = {
   listarTodos,
   buscarPorId,
@@ -114,6 +160,7 @@ module.exports = {
   listarPorMateria,
   listarPorTopico,
   criar,
+  filtrar,
   atualizar,
   deletar
 };

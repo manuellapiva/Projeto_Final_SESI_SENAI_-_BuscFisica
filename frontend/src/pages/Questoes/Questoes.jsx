@@ -7,7 +7,6 @@ import QuestaoCard from "../../components/QuestaoCard/QuestaoCard";
 
 export default function Questoes() {
   const [questoes, setQuestoes] = useState([]);
-  const [todasQuestoes, setTodasQuestoes] = useState([]);
   const [vestibulares, setVestibulares] = useState([]);
   const [topicos, setTopicos] = useState([]);
   const [materias, setMaterias] = useState([]);
@@ -43,7 +42,6 @@ export default function Questoes() {
       setVestibulares(vestibularesData);
       setTopicos(topicosData);
       setMaterias(materiasData);
-      setTodasQuestoes(questoesData);
       setQuestoes(questoesData);
     } catch (error) {
       console.error(error);
@@ -55,68 +53,82 @@ export default function Questoes() {
     }
   }
 
-  function filtrarQuestoes() {
-    let resultado = [
-      ...todasQuestoes,
-    ];
-    if (
-      vestibularSelecionado
-    ) {
+  async function filtrarQuestoes() {
+  try {
+    setLoading(true);
+
+    const params =
+      new URLSearchParams();
+
+    if (vestibularSelecionado) {
       const vestibular =
         vestibulares.find(
-          (v) =>
+          v =>
             String(v.id) ===
             vestibularSelecionado
         );
 
       if (vestibular) {
-        resultado =
-          resultado.filter(
-            (q) =>
-              q.vestibular ===
-              vestibular.nome
-          );
-      }
-    }
-
-    if (topicoSelecionado) {
-      const topico =
-        topicos.find(
-          (t) =>
-            String(t.id_top) ===
-            topicoSelecionado
+        params.append(
+          "vestibular",
+          vestibular.sigla
         );
-
-      if (topico) {
-        resultado =
-          resultado.filter(
-            (q) =>
-              q.topico ===
-              topico.nome_top
-          );
       }
     }
 
     if (materiaSelecionada) {
       const materia =
         materias.find(
-          (m) =>
+          m =>
             String(m.id_mat) ===
             materiaSelecionada
         );
 
       if (materia) {
-        resultado =
-          resultado.filter(
-            (q) =>
-              q.materia ===
-              materia.nome_mat
-          );
+        params.append(
+          "materia",
+          materia.nome_mat
+        );
       }
     }
 
-    setQuestoes(resultado);
+    if (topicoSelecionado) {
+      const topico =
+        topicos.find(
+          t =>
+            String(t.id_top) ===
+            topicoSelecionado
+        );
+
+      if (topico) {
+        params.append(
+          "topico",
+          topico.nome_top
+        );
+      }
+    }
+
+    const response =
+      await fetch(
+        `${API_URL}/questoes/filtro?${params}`
+      );
+
+    const dados =
+      await response.json();
+
+    setQuestoes(dados);
+
+  } catch (error) {
+    console.error(error);
+
+    setErro(
+      "Erro ao filtrar questões."
+    );
+
+  } finally {
+    setLoading(false);
   }
+}
 
   return (
     <>
