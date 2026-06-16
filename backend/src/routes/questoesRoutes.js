@@ -7,12 +7,6 @@ router.get('/', QuestoesController.listarTodos);
 
 router.get('/filtro', QuestoesController.filtrar);
 
-router.get('/vestibular/:vestibular', QuestoesController.listarPorVestibular);
-
-router.get('/materia/:materia', QuestoesController.listarPorMateria);
-
-router.get('/topico/:topico', QuestoesController.listarPorTopico);
-
 router.get('/:id', QuestoesController.buscarPorId);
 
 router.post('/', QuestoesController.criar);

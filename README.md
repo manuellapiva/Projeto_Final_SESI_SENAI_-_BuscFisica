@@ -119,9 +119,6 @@ npm run dev
 - `POST /auth/login` - autenticar usuário
 - `GET /questoes` - listar todas as questões
 - `GET /questoes/:id` - buscar questão por id
-- `GET /questoes/vestibular/:vestibular` - filtrar por vestibular
-- `GET /questoes/materia/:materia` - filtrar por matéria
-- `GET /questoes/topico/:topico` - filtrar por tópico
 - `GET /vestibulares` - listar vestibulares
 - `GET /materia` - listar matérias
 - `GET /topico` - listar tópicos
