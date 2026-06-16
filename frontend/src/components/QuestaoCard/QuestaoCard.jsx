@@ -7,31 +7,42 @@ export default function QuestaoCard({ questao }) {
   const [mostrarResposta, setMostrarResposta] =
     useState(false);
 
-  async function buscarResposta() {
-    if (mostrarResposta) {
-      setMostrarResposta(false);
-      return;
-    }
-
-    try {
-      const response = await fetch(
-        `${API_URL}/questoes/${questao.idq}`
-      );
-
-      if (!response.ok) {
-        throw new Error(
-          "Erro ao buscar resposta"
-        );
-      }
-
-      const data = await response.json();
-      console.log("RESPOSTA:", data);
-      setResposta(data);
-      setMostrarResposta(true);
-    } catch (error) {
-      console.error(error);
-    }
+async function buscarResposta() {
+  if (mostrarResposta) {
+    setMostrarResposta(false);
+    return;
   }
+
+  try {
+    const token =
+      localStorage.getItem("jwtToken");
+
+    const response = await fetch(
+      `${API_URL}/questoes/${questao.idq}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(
+        "Erro ao buscar resposta"
+      );
+    }
+
+    const data = await response.json();
+
+    console.log("RESPOSTA:", data);
+
+    setResposta(data);
+    setMostrarResposta(true);
+
+  } catch (error) {
+    console.error(error);
+  }
+}
 
   return (
     <div className={styles.questaoBox}>
@@ -124,6 +135,28 @@ export default function QuestaoCard({ questao }) {
                     resposta.explicacao_prof
                   }
                 </p>
+              {resposta.videoaula ? (
+                <div className={styles.videoaulaBox}>
+                  <p className={styles.videoaulaTitulo}>
+                    Videoaula
+                  </p>
+
+                  <a
+                    href={resposta.videoaula}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.videoaulaLink}
+                  >
+                    Assistir videoaula
+                  </a>
+                </div>
+              ) : (
+                <div className={styles.videoaulaBox}>
+                  <p className={styles.videoaulaIndisponivel}>
+                    Videoaula não disponível para esta questão.
+                  </p>
+                </div>
+              )}
               </div>
             </div>
           )}

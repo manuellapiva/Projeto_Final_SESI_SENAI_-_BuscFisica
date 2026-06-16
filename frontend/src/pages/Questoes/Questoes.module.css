@@ -200,6 +200,68 @@ body {
     margin: 12px 0;
 }
 
+.videoaulaBox {
+  margin-top: 20px;
+  padding: 16px;
+  border-radius: 12px;
+  background-color: #f5f7fa;
+  border: 1px solid #d9e2ec;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+  width: fit-content;
+}
+
+.videoaulaTitulo {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.videoaulaLink {
+  display: inline-block;
+  padding: 10px 18px;
+  background-color: #7b2cbf;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.videoaulaLink:hover {
+  transform: translateY(-2px);
+  opacity: 0.9;
+}
+
+.videoaulaLink:active {
+  transform: translateY(0);
+}
+
+.videoaulaIndisponivel {
+  margin: 0;
+  color: #6b7280;
+  font-style: italic;
+}
+
+.contadorQuestoes {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto 20px auto;
+  padding: 12px 16px;
+  background-color: #f5f5f5;
+  border-left: 5px solid #7b2cbf;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.contadorQuestoes strong {
+  color: #7b2cbf;
+  font-size: 1.1rem;
+}
+
 @media (max-width: 1024px) {
 
     .filtros {
@@ -276,6 +338,18 @@ body {
         height: auto;
         padding: 15px 20px;
     }
+
+    .contadorQuestoes {
+        padding: 12px 14px;
+        font-size: 0.95rem;
+        width: 80%;
+        margin-bottom: 18px;
+    }
+
+    .contadorQuestoes strong {
+        font-size: 1rem;
+    }
+    
 }
 
 @media (max-width: 768px) {
@@ -434,5 +508,20 @@ body {
     .respostaConteudo p {
         font-size: 0.95rem;
         line-height: 1.5;
+    }
+
+    .contadorQuestoes {
+        padding: 10px 12px;
+        font-size: 0.9rem;
+        text-align: center;
+        width: 80%;
+        border-left-width: 4px;
+        margin-bottom: 15px;
+    }
+
+    .contadorQuestoes strong {
+        display: block;
+        margin-top: 4px;
+        font-size: 1.1rem;
     }
 }

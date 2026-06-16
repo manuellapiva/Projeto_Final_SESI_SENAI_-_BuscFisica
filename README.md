@@ -8,6 +8,24 @@ Este projeto é uma plataforma de estudos de Física chamada **BUSCFÍSICA**, cr
 - **Backend** em Node.js/Express
 - **Banco de dados PostgreSQL** para armazenar questões, usuários, matérias, tópicos, vestibulares e respostas
 
+## Tecnologias utilizadas
+
+- HTML5
+- CSS3
+- JavaScript (ESM)
+- JSX
+- React
+- React Router
+- Vite
+- Node.js
+- Express
+- PostgreSQL
+- JWT (JSON Web Token)
+- CORS
+- dotenv
+- NPM
+- localStorage
+
 ## Funcionalidades principais
 
 - Login com autenticação via JWT

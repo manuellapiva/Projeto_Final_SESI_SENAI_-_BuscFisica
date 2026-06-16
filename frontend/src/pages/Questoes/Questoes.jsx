@@ -23,16 +23,23 @@ export default function Questoes() {
   async function carregarDados() {
     try {
       setLoading(true);
+
+      const token = localStorage.getItem("jwtToken");
+
+      const headers = {
+        Authorization: `Bearer ${token}`
+      };
+
       const [
         questoesRes,
         vestibularesRes,
         materiasRes,
         topicosRes,
       ] = await Promise.all([
-        fetch(`${API_URL}/questoes`),
-        fetch(`${API_URL}/vestibulares`),
-        fetch(`${API_URL}/materia`),
-        fetch(`${API_URL}/topico`)
+        fetch(`${API_URL}/questoes`, { headers }),
+        fetch(`${API_URL}/vestibulares`, { headers }),
+        fetch(`${API_URL}/materia`, { headers }),
+        fetch(`${API_URL}/topico`, { headers })
       ]);
       const questoesData = await questoesRes.json();
       const vestibularesData = await vestibularesRes.json();
@@ -108,9 +115,16 @@ export default function Questoes() {
       }
     }
 
+    const token = localStorage.getItem("jwtToken");
+
     const response =
       await fetch(
-        `${API_URL}/questoes/filtro?${params}`
+        `${API_URL}/questoes/filtro?${params}`,
+        {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
       );
 
     const dados =
@@ -236,6 +250,12 @@ export default function Questoes() {
 
         {erro && (
           <h2>{erro}</h2>
+        )}
+
+        {!loading && !erro && (
+          <div className={styles.contadorQuestoes}>
+            Questões exibidas: <strong>{questoes.length}</strong>
+          </div>
         )}
 
         {!loading &&
