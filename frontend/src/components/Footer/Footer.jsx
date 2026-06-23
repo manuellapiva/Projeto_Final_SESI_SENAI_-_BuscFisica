@@ -6,7 +6,7 @@ export default function Footer() {
 
     function logout () {
         localStorage.removeItem("jwtToken")
-        navigate ("/")
+        navigate ("/") 
     }
 
     return (
