@@ -36,10 +36,6 @@ app.use('/usuario', verificarToken, usuarioRoutes);
 const vestibularesRoutes = require('./src/routes/vestibularesRoutes');
 app.use('/vestibulares', verificarToken, vestibularesRoutes);
 
-app.get('/cadastro', (req, res) => {
-  res.sendFile(path.join(__dirname, 'src', 'public', 'home.jsx'));
-});
-
 app.get('/', (req, res) => {
   res.json({ 
     mensagem: 'API do Projeto Final SESI SENAI com PostgreSQL',
