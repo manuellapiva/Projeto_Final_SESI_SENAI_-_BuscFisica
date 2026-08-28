@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styles from "./Login.module.css";
 import Footer from '../../components/Footer/Footer'
 import logo from "/img/logo_buscfisica.png";
@@ -127,15 +127,6 @@ export default function Login() {
               </button>
             </div>
 
-            <div className={styles.loginLink}>
-              <span>
-                Ainda não possui conta?
-              </span>
-
-              <Link to="#">
-                Criar conta
-              </Link>
-            </div>
           </form>
         </section>
       </main>
