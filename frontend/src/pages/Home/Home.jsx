@@ -50,11 +50,10 @@ export default function Home() {
 
           <div className={styles.card}>
             <h3>
-              Acompanhe sua evolução
+              Melhores seus resultados
             </h3>
             <p>
-              Monitore seus resultados e evolua
-              com estratégia.
+              Veja explicações completas e videoaulas para te ajudarem no seu desenvolvimento.
             </p>
           </div>
         </section>
